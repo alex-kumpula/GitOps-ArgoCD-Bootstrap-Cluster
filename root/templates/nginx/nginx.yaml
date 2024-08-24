@@ -1,0 +1,22 @@
+{{ if .Values.apps.nginx.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-{{ .Values.env }}
+  namespace: {{ .Values.apps.nginx.namespace }}
+spec:
+  project: default
+  source:
+    chart: {{ .Values.apps.nginx.source.chart }}
+    repoURL: {{ .Values.apps.nginx.source.repoURL }}
+    targetRevision: {{ .Values.apps.nginx.source.targetRevision }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated: 
+      prune: {{ .Values.appCommonSettings.spec.syncPolicy.automated.prune }} 
+      selfHeal: {{ .Values.appCommonSettings.spec.syncPolicy.automated.selfHeal }}
+{{ end }}

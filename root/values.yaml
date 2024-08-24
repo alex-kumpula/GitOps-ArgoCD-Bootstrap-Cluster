@@ -1,9 +1,26 @@
-env: "" # This should be overridden
-source:
-  repoURL: "" # This should be overridden
+env: "" # This should be overridden by environment-specific value files
+bootstrap:
+  source:
+    repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3
+    path: boostrap
+argocd:
+  source:
+    repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3
+    path: argocd
+appCommonSettings:
+  spec:
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
 apps:
   nginx:
     enabled: false
+    namespace: default
+    source:
+      chart: nginx
+      repoURL: registry-1.docker.io/bitnamicharts
+      targetRevision: 15.9.0
 
 
 

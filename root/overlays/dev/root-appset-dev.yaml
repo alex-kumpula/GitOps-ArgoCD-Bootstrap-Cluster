@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: root-appset
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - name: nginx
+        displayNamePostfix: -dev
+        path: apps/nginx/dev

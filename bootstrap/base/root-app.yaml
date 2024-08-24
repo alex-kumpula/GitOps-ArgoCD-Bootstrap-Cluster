@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: {{ .Values.source.repoURL }}
+    repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3
     targetRevision: HEAD
-    path: bootstrap
+    path: root/base
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

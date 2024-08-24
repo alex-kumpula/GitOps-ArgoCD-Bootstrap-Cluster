@@ -1,9 +1,0 @@
-source:
-  repoURL: null  # This should be set externally
-
-destination:
-  argocd: https://kubernetes.default.svc
-  bootstrap: https://kubernetes.default.svc
-
-env: dev
-

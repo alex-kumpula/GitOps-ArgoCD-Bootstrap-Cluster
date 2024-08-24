@@ -4,6 +4,15 @@ This repo serves to act as the source of truth for a GitOps-based ArgoCD-managed
 
 In order to bootstrap a cluster with this repository, there are two steps: Installing the ArgoCD  Helm Chart and Installing the Bootstrap Helm Chart.
 
+## Cloning this Repo
+
+To begin, clone or fork this repo and host it on Git.
+
+Once that is done, retrieve the git url of the repo. Replace the repoURL fields in the following files with your git url:
+
+* bootstrap/base/root-app.yaml
+* root/base/bootstrap-app.yaml
+
 ## Boostrapping
 
 ### Installing the ArgoCD Helm Chart
@@ -34,7 +43,7 @@ To install ArgoCD into your cluster, do the following:
 
 Now ArgoCD is installed in your cluster and you can login through the WebUI.
 
-#### Private Source Repo Setup
+### OPTIONAL: Private Source Repo Setup
 
 In the case that you want this source-of-truth repository to be private, you will need to add a secret to your cluster that contains the key to your repo.
 
@@ -48,11 +57,15 @@ TBD
 
 ### Installing the Bootstrap Helm Chart
 
-`helm template bootstrap | kubectl apply -f -`
-
 There you go! Now you have a Argo-CD git-ops cluster bootstrapped and ready to go!
 
 ## How It Works
 
 1. Apply the bootstrap kustomize overlay corresponding to the environment (dev, staging, prod, etc.) you want.
 2.
+
+## Known Limitations
+
+* Using Kustomize and Helm Charts together via the Kustomize helm chart inflator generator does not work for charts located in private helm repos. See the[Kustomize Docs here](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/helmcharts/#the-current-builtin).
+  * Despite this, Kustomize + Helm is still viable for public charts, and the most common use-case for this will probably be third-party charts. Ideally, the only charts located in private repos are ones you would have less need to apply a Kustomization to in the first place.
+  * NOTE: For the helm chart inflation generator to work with ArgoCD in the first place, the following needs to be enabled in ArgoCD's config map:`kustomize.buildOptions: --enable-helm `

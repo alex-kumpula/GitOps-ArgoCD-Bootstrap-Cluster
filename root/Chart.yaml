@@ -1,5 +1,0 @@
-apiVersion: v2
-name: root
-description: The root of the cluster.
-type: application
-version: 1.0.0

@@ -1,0 +1,9 @@
+env: "" # This should be overridden
+source:
+  repoURL: "" # This should be overridden
+apps:
+  nginx:
+    enabled: false
+
+
+

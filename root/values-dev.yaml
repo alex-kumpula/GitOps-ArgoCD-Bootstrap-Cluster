@@ -1,0 +1,7 @@
+env: dev
+apps:
+  nginx:
+    enabled: true
+    
+
+

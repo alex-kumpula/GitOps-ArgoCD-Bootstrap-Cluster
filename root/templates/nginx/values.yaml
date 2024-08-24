@@ -1,6 +1,6 @@
+{{ if false }}
 env: "" # This should be overridden
 source:
   repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3
-    
-
+{{ end }}
 

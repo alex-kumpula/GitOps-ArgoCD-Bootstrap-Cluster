@@ -1,7 +1,7 @@
 env: dev
 apps:
   nginx:
-    enabled: true
+    enabled: false
     
 
 

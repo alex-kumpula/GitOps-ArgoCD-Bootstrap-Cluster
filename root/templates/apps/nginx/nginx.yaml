@@ -13,6 +13,7 @@ spec:
     chart: {{ .Values.apps.nginx.source.chart }}
     targetRevision: {{ .Values.apps.nginx.source.targetRevision }}
     helm:
+      ignoreMissingValueFiles: true
       valueFiles:
       - $values/{{ .Values.root.source.path }}/templates/apps/nginx/helmValues/values.yaml
       - $values/{{ .Values.root.source.path }}/templates/apps/nginx/helmValues/values-{{ .Values.env }}.yaml

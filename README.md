@@ -43,9 +43,16 @@ To install ArgoCD into your cluster, do the following:
 
 Now ArgoCD is installed in your cluster and you can login through the WebUI.
 
-### Configure Values
+### Configure Values (RepoURLS)
 
+Assuming you created your own repository from this one, you need to make sure that the manifests point to your repo.
 
+To acheive this, do the following:
+
+1. In bootstrap/values.yaml, change the repoURLs to the url of your repo.
+2. Do the same as in step #1 but in root/values.yaml.
+
+As you may have noticed, there are other values that can be changed, as well as overridden depending on environment (dev, staging, prod), but we will get to those later.
 
 
 ### OPTIONAL: Private Source Repo Setup

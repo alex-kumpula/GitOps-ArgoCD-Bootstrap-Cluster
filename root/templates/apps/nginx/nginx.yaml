@@ -13,7 +13,9 @@ spec:
     chart: {{ .Values.apps.nginx.source.chart }}
     targetRevision: {{ .Values.apps.nginx.source.targetRevision }}
     helm:
-      ignoreMissingValueFiles: true
+      # So that if there is a missing environment values file
+      # (eg. values-prod.yaml), it will default to just values.yaml
+      ignoreMissingValueFiles: true 
       valueFiles:
       - $values/{{ .Values.root.source.path }}/templates/apps/nginx/helmValues/values.yaml
       - $values/{{ .Values.root.source.path }}/templates/apps/nginx/helmValues/values-{{ .Values.env }}.yaml

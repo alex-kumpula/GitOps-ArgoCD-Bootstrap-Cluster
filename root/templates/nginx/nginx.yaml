@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   source:
-  - repoURL: {{ .Values.apps.nginx.source.repoURL }}
+    repoURL: {{ .Values.apps.nginx.source.repoURL }}
     chart: {{ .Values.apps.nginx.source.chart }}
     targetRevision: {{ .Values.apps.nginx.source.targetRevision }}
   destination:

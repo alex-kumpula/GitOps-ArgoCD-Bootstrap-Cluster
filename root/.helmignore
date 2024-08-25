@@ -1,4 +1,4 @@
 .helmignore
 
 # Where you can store value files for different helm environments
-templates/*/helmValues
+templates/apps/*/helmValues

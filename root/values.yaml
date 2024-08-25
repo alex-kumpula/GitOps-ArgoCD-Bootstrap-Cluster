@@ -6,7 +6,7 @@ root:
 bootstrap:
   source:
     repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3
-    path: bootsrap
+    path: bootstrap
 argocd:
   source:
     repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3

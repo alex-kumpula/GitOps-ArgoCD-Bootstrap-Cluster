@@ -6,12 +6,9 @@ In order to bootstrap a cluster with this repository, there are two steps: Insta
 
 ## Cloning this Repo
 
-To begin, clone or fork this repo and host it on Git.
+To begin, clone or fork this repo and host it on Git. 
 
-Once that is done, retrieve the git url of the repo. Replace the repoURL fields in the following files with your git url:
-
-* bootstrap/base/root-app.yaml
-* root/base/bootstrap-app.yaml
+If you want the repository to be private, see further below.
 
 ## Boostrapping
 
@@ -47,13 +44,20 @@ Now ArgoCD is installed in your cluster and you can login through the WebUI.
 
 Assuming you created your own repository from this one, you need to make sure that the manifests point to your repo.
 
-To acheive this, do the following:
+To achieve this, do the following:
 
-1. In bootstrap/values.yaml, change the repoURLs to the url of your repo.
-2. Do the same as in step #1 but in root/values.yaml.
+1. In`bootstrap/values.yaml`, change the`repoURL` fields to the url of your repo.
+2. Do the same as in step #1 but in`root/values.yaml`.
 
 As you may have noticed, there are other values that can be changed, as well as overridden depending on environment (dev, staging, prod), but we will get to those later.
 
+### Deploy Bootstrap Helm Chart
+
+All you have to do to get the cluster running is to apply the bootstrap helm chart. This is also where you will pick which environment to deploy on your cluster. To achieve this, do the following:
+
+1. Run the following command:`helm template -f bootstrap/values-dev.yaml bootstrap | kubectl apply -f -`
+
+Now your cluster will sync with the manifests in your git repo. You can check the ArgoCD Web UI to confirm that this has happened.
 
 ### OPTIONAL: Private Source Repo Setup
 
@@ -67,14 +71,27 @@ There are multiple ways to achieve this, but methods that store an encrypted man
 
 TBD
 
-### Installing the Bootstrap Helm Chart
-
-There you go! Now you have a Argo-CD git-ops cluster bootstrapped and ready to go!
 
 ## How It Works
 
-1. Apply the bootstrap kustomize overlay corresponding to the environment (dev, staging, prod, etc.) you want.
-2.
+### Bootstrap and Root
+
+There are two main helm charts:
+
+* `bootstrap`
+  * Deploys the root helm chart and ArgoCD through application manifests
+* `root`
+  * Deploys the bootstrap helm chart through an application manifest as well as any other applications one adds to this repo.
+
+Since `bootstrap` deploys `root` and `root` deploys `bootstrap`, they sync eachother through ArgoCD to self-manage eachother. 
+
+Additionally, since `bootstrap` deploys ArgoCD through an application manifest, it also ensures ArgoCD self-manages itself. NOTE: The argocd directory in this git repo is just meant to help deploy ArgoCD for the first time as shown in the Bootstrapping section of this readme. ArgoCD's actual settings are stored in `bootstrap/templates/argocd`.
+
+### Environments
+
+By default, this repository supports dev, staging, and prod environments, but can easily be modified to support more.
+
+You can choose what environment to use by deploying `bootstrap` with the corresponding values file. There is meant to only be one environment per cluster with ArgoCD installed.
 
 ## Known Limitations
 

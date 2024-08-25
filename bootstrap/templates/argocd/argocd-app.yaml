@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-{{ .Values.env }}
+  namespace: argocd
+spec:
+  project: default
+  sources:
+  - repoURL: https://argoproj.github.io/argo-helm
+    chart: argo-cd
+    targetRevision: 7.4.5
+    helm:
+      valueFiles:
+      - $values/bootstrap/templates/argocd/helmValues/values.yaml
+      - $values/bootstrap/templates/argocd/helmValues/values-{{ .Values.env }}.yaml
+  - repoURL: {{ .Values.source.repoURL }}
+    targetRevision: HEAD
+    ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated: 
+      prune: true 
+      selfHeal: true

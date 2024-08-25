@@ -1,6 +1,3 @@
-env: "" # This should be overridden
+env: "" # This should be overridden in environment-specific value files
 source:
   repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3
-    
-
-

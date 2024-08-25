@@ -43,6 +43,11 @@ To install ArgoCD into your cluster, do the following:
 
 Now ArgoCD is installed in your cluster and you can login through the WebUI.
 
+### Configure Values
+
+
+
+
 ### OPTIONAL: Private Source Repo Setup
 
 In the case that you want this source-of-truth repository to be private, you will need to add a secret to your cluster that contains the key to your repo.

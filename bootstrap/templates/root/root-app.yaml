@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: {{ .Values.source.repoURL }}
+    repoURL: {{ .Values.root.source.repoURL }}
     targetRevision: HEAD
-    path: root
+    path: {{ .Values.root.source.path }}
     helm:
       valueFiles:
       - values-{{ .Values.env }}.yaml

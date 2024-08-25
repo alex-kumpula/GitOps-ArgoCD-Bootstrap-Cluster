@@ -1,16 +1,12 @@
 env: "" # This should be overridden by environment-specific value files
-root:
-  source:
-    repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3
-    path: root
 bootstrap:
   source:
     repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3
     path: bootstrap
-argocd:
+root:
   source:
     repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3
-    path: argocd
+    path: root
 appCommonSettings: 
   spec:
     syncPolicy:

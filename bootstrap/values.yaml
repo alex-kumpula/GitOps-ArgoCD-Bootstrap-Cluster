@@ -1,3 +1,9 @@
 env: "" # This should be overridden in environment-specific value files
-source:
-  repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3
+bootstrap:
+  source:
+    repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3
+    path: bootstrap
+root:
+  source:
+    repoURL: https://github.com/alex-kumpula/ArgoCD-Test-3
+    path: root

@@ -1,0 +1,14 @@
+argo-cd:
+  dex:
+    enabled: false
+  notifications:
+    enabled: false
+  applicationSet:
+    enabled: true
+  server:
+    extraArgs:
+      - --insecure
+  configs:
+    cm:
+      # Build options/parameters to use with `kustomize build` (optional)
+      kustomize.buildOptions: --enable-helm # See https://github.com/argoproj/argo-helm/issues/1817

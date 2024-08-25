@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-{{ .Values.env }}
+  name: argocd-{{ .Values.env }}
   namespace: argocd
 spec:
   project: default

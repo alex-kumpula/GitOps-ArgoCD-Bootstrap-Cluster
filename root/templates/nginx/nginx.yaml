@@ -16,7 +16,7 @@ spec:
       valueFiles:
       - $values/root/templates/nginx/helmValues/values.yaml
       - $values/root/templates/nginx/helmValues/values-{{ .Values.env }}.yaml
-  - repoURL: {{ .Values.root.source.repoURL }}
+  - repoURL: {{ .Values.root.source.repoURL }} 
     targetRevision: HEAD
     ref: values
   destination:

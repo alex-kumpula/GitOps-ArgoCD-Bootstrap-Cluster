@@ -8,7 +8,7 @@ metadata:
   namespace: {{ .Values.apps.nginx.namespace }}
 spec:
   project: default
-  source:
+  sources:
   - repoURL: {{ .Values.apps.nginx.source.repoURL }}
     chart: {{ .Values.apps.nginx.source.chart }}
     targetRevision: {{ .Values.apps.nginx.source.targetRevision }}

@@ -5,23 +5,23 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: nginx-{{ .Values.env }}
-  namespace: {{ .Values.apps.nginx.namespace }}
+  namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: {{ .Values.apps.nginx.source.repoURL }}
+  sources:
+  - repoURL: {{ .Values.apps.nginx.source.repoURL }}
     chart: {{ .Values.apps.nginx.source.chart }}
     targetRevision: {{ .Values.apps.nginx.source.targetRevision }}
-  #   helm:
-  #     valueFiles:
-  #     - $values/root/templates/nginx/helmValues/values.yaml
-  #     - $values/root/templates/nginx/helmValues/values-{{ .Values.env }}.yaml
-  # - repoURL: {{ .Values.root.source.repoURL }} 
-  #   targetRevision: HEAD
-  #   ref: values
+    helm:
+      valueFiles:
+      - $values/root/templates/nginx/helmValues/values.yaml
+      - $values/root/templates/nginx/helmValues/values-{{ .Values.env }}.yaml
+  - repoURL: {{ .Values.root.source.repoURL }} 
+    targetRevision: HEAD
+    ref: values
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: {{ .Values.apps.nginx.namespace }}
   syncPolicy:
     syncOptions:
     - CreateNamespace=true

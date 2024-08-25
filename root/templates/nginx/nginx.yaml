@@ -1,3 +1,5 @@
+# Important, only include if enabled through a values.yaml,
+# which can be environment-specific
 {{ if .Values.apps.nginx.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -7,9 +9,16 @@ metadata:
 spec:
   project: default
   source:
+  - repoURL: {{ .Values.apps.nginx.source.repoURL }}
     chart: {{ .Values.apps.nginx.source.chart }}
-    repoURL: {{ .Values.apps.nginx.source.repoURL }}
     targetRevision: {{ .Values.apps.nginx.source.targetRevision }}
+    helm:
+      valueFiles:
+      - $values/root/templates/nginx/helmValues/values.yaml
+      - $values/root/templates/nginx/helmValues/values-{{ .Values.env }}.yaml
+  - repoURL: {{ .Values.root.source.repoURL }}
+    targetRevision: HEAD
+    ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

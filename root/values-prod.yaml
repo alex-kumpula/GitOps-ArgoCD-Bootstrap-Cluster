@@ -1,8 +1,4 @@
-{{ if "true" }}
 env: prod
 apps:
   nginx:
     enabled: true
-{{ end }}
-
-

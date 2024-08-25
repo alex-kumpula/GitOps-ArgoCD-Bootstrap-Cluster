@@ -66,6 +66,8 @@ There you go! Now you have a Argo-CD git-ops cluster bootstrapped and ready to g
 
 ## Known Limitations
 
+* If wanting to run multiple environments on the same cluster, use a solution like vClusters.
+  * Reason: Multiple ArgoCD instances per cluster are not supported without use of a tool like the one above.
 * Using Kustomize and Helm Charts together via the Kustomize helm chart inflator generator does not work for charts located in private helm repos. See the[Kustomize Docs here](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/helmcharts/#the-current-builtin).
   * Despite this, Kustomize + Helm is still viable for public charts, and the most common use-case for this will probably be third-party charts. Ideally, the only charts located in private repos are ones you would have less need to apply a Kustomization to in the first place.
   * NOTE: For the helm chart inflation generator to work with ArgoCD in the first place, the following needs to be enabled in ArgoCD's config map:`kustomize.buildOptions: --enable-helm `

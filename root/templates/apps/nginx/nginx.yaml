@@ -14,8 +14,8 @@ spec:
     targetRevision: {{ .Values.apps.nginx.source.targetRevision }}
     helm:
       valueFiles:
-      - $values/root/templates/apps/nginx/helmValues/values.yaml
-      - $values/root/templates/apps/nginx/helmValues/values-{{ .Values.env }}.yaml
+      - $values/{{ .Values.root.source.path }}/templates/apps/nginx/helmValues/values.yaml
+      - $values/{{ .Values.root.source.path }}/templates/apps/nginx/helmValues/values-{{ .Values.env }}.yaml
   - repoURL: {{ .Values.root.source.repoURL }}
     targetRevision: HEAD
     ref: values

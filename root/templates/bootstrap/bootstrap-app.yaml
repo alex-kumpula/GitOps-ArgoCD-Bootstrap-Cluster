@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap-{{ .Values.env }}
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: {{ .Values.bootstrap.source.repoURL }}
+    targetRevision: HEAD
+    path: {{ .Values.bootstrap.source.path }}
+    helm:
+      valueFiles:
+      - values-{{ .Values.env }}.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated: 
+      prune: true 
+      selfHeal: true

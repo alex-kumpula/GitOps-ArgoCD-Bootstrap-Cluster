@@ -1,7 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-{{ .Values.env }}
+  # Don't append environment name to this, there should only be
+  # one instance of ArgoCD per cluster. Nonetheless, the configuration
+  # is still different depending on the environment like other regular
+  # apps are.
+  name: argocd  
   namespace: argocd
 spec:
   project: default
